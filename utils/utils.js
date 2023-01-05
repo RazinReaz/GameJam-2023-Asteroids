@@ -7,7 +7,7 @@ Array.prototype.random = function () {
 }
 function resetAsteroidIfNeeded(asteroid) {
     let d = dist(asteroid.position.x, asteroid.position.y, SCREEN_CENTER_X, SCREEN_CENTER_Y );
-    if( d >= DIST_TO_RESET_ASTEROID ){
+    if( d >= asteroid.resetDist ){
         let src = asteroid_generation_areas.random().getRandPos();
         let dest = asteroid_target_region.getRandPos();
 
@@ -16,6 +16,17 @@ function resetAsteroidIfNeeded(asteroid) {
         asteroid.velocity.x = dest.x - src.x;
         asteroid.velocity.y = dest.y - src.y;
         asteroid.velocity.setMag(AST_VEL_MAG_MIN, AST_VEL_MAG_MAX);
+        asteroid.totalPoints = floor(random(AST_POINTS_MIN, AST_POINTS_MAX));
+        asteroid.offsets = [];
+        for (let i = 0; i < asteroid.totalPoints; i++) {
+            asteroid.offsets.push(random(AST_OFFSET_MIN, AST_OFFSET_MAX));
+        }
+    }
+}
+
+function sizeConstraintOfLasers(lasers) {
+    if(lasers.length > MAX_LASER_AMOUNT){
+        lasers.pop();
     }
 }
 
