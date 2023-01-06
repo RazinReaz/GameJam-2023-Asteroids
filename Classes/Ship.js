@@ -17,6 +17,19 @@ class Ship {
     this.health = 5;
   }
 
+  reset() {
+    this.x = SCREEN_CENTER_X;
+    this.y = SCREEN_CENTER_Y;
+    this.vx = 0;
+    this.vy = 0;
+    this.heading = 0;
+    this.moveDirection = 0;
+    this.turnDirection = 0; 
+    this.radius = 10;
+    this.color = 51;
+    this.health = 5;
+  }
+
 
   update() {
     this.heading += this.turnDirection * this.turnSpeed;

@@ -8,23 +8,7 @@ Array.prototype.random = function () {
 function resetAsteroidIfNeeded(asteroid) {
     let d = dist(asteroid.position.x, asteroid.position.y, SCREEN_CENTER_X, SCREEN_CENTER_Y);
     if (d >= asteroid.resetDist) {
-        let src = asteroid_generation_areas.random().getRandPos();
-        let dest = asteroid_target_region.getRandPos();
-
-        asteroid.position.x = src.x;
-        asteroid.position.y = src.y;
-        asteroid.velocity.x = dest.x - src.x;
-        asteroid.velocity.y = dest.y - src.y;
-        asteroid.velocity.setMag(AST_VEL_MAG_MIN, AST_VEL_MAG_MAX);
-        asteroid.totalPoints = floor(random(AST_POINTS_MIN, AST_POINTS_MAX));
-        asteroid.offsets = [];
-        let offsetSum = 0;
-        for (let i = 0; i < asteroid.totalPoints; i++) {
-            let o = random(AST_OFFSET_MIN, AST_OFFSET_MAX)
-            asteroid.offsets.push(o);
-            offsetSum += o;
-        }
-        asteroid.offsetAvg = offsetSum / asteroid.totalPoints;
+        asteroid.reset();
     }
 }
 
