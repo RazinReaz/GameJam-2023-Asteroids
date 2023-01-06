@@ -70,5 +70,6 @@ function draw() {
   }
 
   sizeConstraintOfLasers(lasers);
+  sizeConstraintOfAsteroids(asteroids);
 }
 

@@ -1,4 +1,4 @@
-function dist(x1,y1,x2,y2){
+function dist(x1, y1, x2, y2) {
     return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
 
@@ -6,8 +6,8 @@ Array.prototype.random = function () {
     return this[Math.floor((Math.random() * this.length))];
 }
 function resetAsteroidIfNeeded(asteroid) {
-    let d = dist(asteroid.position.x, asteroid.position.y, SCREEN_CENTER_X, SCREEN_CENTER_Y );
-    if( d >= asteroid.resetDist ){
+    let d = dist(asteroid.position.x, asteroid.position.y, SCREEN_CENTER_X, SCREEN_CENTER_Y);
+    if (d >= asteroid.resetDist) {
         let src = asteroid_generation_areas.random().getRandPos();
         let dest = asteroid_target_region.getRandPos();
 
@@ -25,8 +25,16 @@ function resetAsteroidIfNeeded(asteroid) {
 }
 
 function sizeConstraintOfLasers(lasers) {
-    if(lasers.length > MAX_LASER_AMOUNT){
+    if (lasers.length > MAX_LASER_AMOUNT) {
         lasers.pop();
+    }
+}
+
+function sizeConstraintOfAsteroids(asteroids) {
+    if (asteroids.length < ASTEROID_COUNT) {
+        let src = asteroid_generation_areas.random().getRandPos();
+        let dest = asteroid_target_region.getRandPos();
+        asteroids.push(new Asteroid(src.x, src.y, dest.x - src.x, dest.y - src.y));
     }
 }
 

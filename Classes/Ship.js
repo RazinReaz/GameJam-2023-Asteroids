@@ -56,7 +56,7 @@ class Ship {
     if (moveDirection == +1) {
       fill(255, 255, 0);
       triangle(-this.radius, -this.radius / 3, -this.radius, this.radius / 3, -this.radius * 4, 0);
-      fill(255, 0, 0);
+      fill(255, 102, 102);
       triangle(-this.radius, -this.radius / 4, -this.radius, this.radius / 4, -this.radius * 3, 0);
     }
   }
