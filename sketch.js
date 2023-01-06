@@ -45,6 +45,7 @@ function setup() {
 
 function draw() {
   background(51);
+
   ship.update();
   ship.render();
 
@@ -57,11 +58,8 @@ function draw() {
   //ship collision color change
   let collides = checkShipCollisionWithAsteroids(ship, asteroids);
   if(collides){
-    ship.color = 'red';
-  } else {
-    ship.color = 255;
+    ship.decreaseHealth();
   }
-
 
   // 32 is keycode of space
   if (keyIsDown(32)) {
@@ -72,6 +70,7 @@ function draw() {
     lasers[i].render();
     for (let j = asteroids.length - 1; j >= 0; j--) {
       if (lasers[i].hits(asteroids[j])) {
+        handleLaserHitInteractionByLevel(asteroids[j]);
         let smallerAsteroids = asteroids[j].break();
         for (a of smallerAsteroids) {
           asteroids.push(a);
@@ -83,7 +82,10 @@ function draw() {
     }
   }
 
-  sizeConstraintOfLasers(lasers);
+  showProgressBar();
+  constraintOfLasers(lasers);
   sizeConstraintOfAsteroids(asteroids);
+  laserTimer();
+  collisionTimer(ship);
 }
 

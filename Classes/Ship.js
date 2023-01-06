@@ -14,6 +14,7 @@ class Ship {
 
     this.radius = 10;
     this.color = 51;
+    this.health = 5;
   }
 
 
@@ -48,28 +49,61 @@ class Ship {
       this.renderFlame(this.moveDirection);
     }
     pop();
-
+    this.renderHealth();
   }
 
   renderFlame(moveDirection) {
     noStroke();
     if (moveDirection == +1) {
-      fill(255, 255, 0);
-      triangle(-this.radius, -this.radius / 3, -this.radius, this.radius / 3, -this.radius * 4, 0);
       fill(255, 102, 102);
+      triangle(-this.radius, -this.radius / 3, -this.radius, this.radius / 3, -this.radius * 4, 0);
+      fill(255, 255, 0);
       triangle(-this.radius, -this.radius / 4, -this.radius, this.radius / 4, -this.radius * 3, 0);
     }
   }
 
-  shoot() {
-    if (Laser_Limiter_Counter == 0)
-      lasers.unshift(new Laser(this));
-    Laser_Limiter_Counter = (Laser_Limiter_Counter + 1) % LASER_LIMITER;
+  renderHealth() {
+    for(let i = 0; i< this.health; i++){
+      this.drawHeart(20+i*25, 25, 5);
+    }
   }
+
+  drawHeart(x, y, s) {
+    push();
+    translate(x, y);
+    noStroke();
+    fill(255,11,11);
+    beginShape();
+    vertex(0,0);
+    vertex(s,-s);
+    vertex(2*s,0);
+    vertex(0,2*s);
+    vertex(-2*s,0);
+    vertex(-s,-s);
+    endShape(CLOSE);
+    pop();
+  }
+
+  shoot() {
+    if (Laser_Limiter_Counter == 0){
+      lasers.unshift(new Laser(this));
+      Laser_Limiter_Counter = 1;
+    }
+  }
+
 
   hits(asteroid) {
     // can be made much more accurate
     let d = dist(this.x, this.y, asteroid.position.x, asteroid.position.y);
     return d < this.radius * 0.9 + (asteroid.radius + asteroid.offsetAvg) * asteroid.sizeMultiplier;
   }
+
+  decreaseHealth() {
+    // ! LEVEL CHANGE
+    if(Collision_timer_counter == 0) {
+      this.health = max(0, this.health - 1);
+      Collision_timer_counter++;
+    }
+  }
+
 }

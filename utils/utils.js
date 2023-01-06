@@ -24,21 +24,31 @@ function resetAsteroidIfNeeded(asteroid) {
             asteroid.offsets.push(o);
             offsetSum += o;
         }
-        asteroid.offsetAvg = offsetSum/asteroid.totalPoints;
+        asteroid.offsetAvg = offsetSum / asteroid.totalPoints;
     }
 }
 
-function sizeConstraintOfLasers(lasers) {
-    if (lasers.length > MAX_LASER_AMOUNT) {
-        lasers.pop();
+function constraintOfLasers(lasers) {
+    for (let i = 0; i < lasers.length; i++) {
+        let laser = lasers[i];
+        if (laser.x < 0 || laser.x > SCREEN_WIDTH) {
+            lasers.splice(i, 1);
+            continue;
+        }
+        if (laser.y < 0 || laser.y > SCREEN_HEIGHT) {
+            lasers.splice(i, 1);
+            continue;
+        }
     }
 }
 
 function sizeConstraintOfAsteroids(asteroids) {
     if (asteroids.length < ASTEROID_COUNT) {
-        let src = asteroid_generation_areas.random().getRandPos();
-        let dest = asteroid_target_region.getRandPos();
-        asteroids.push(new Asteroid(src.x, src.y, dest.x - src.x, dest.y - src.y));
+        for (let i = 0; i < NEW_ASTEROID_COUNT; i++) {
+            let src = asteroid_generation_areas.random().getRandPos();
+            let dest = asteroid_target_region.getRandPos();
+            asteroids.push(new Asteroid(src.x, src.y, dest.x - src.x, dest.y - src.y));
+        }
     }
 }
 
@@ -50,3 +60,31 @@ function checkShipCollisionWithAsteroids(ship, asteroids) {
     return false;
 }
 
+function laserTimer() {
+    if (Laser_Limiter_Counter != 0) {
+        Laser_Limiter_Counter = (Laser_Limiter_Counter + 1) % LASER_LIMITER;
+    }
+}
+
+function collisionTimer(ship) {
+    renderShipInvincibilityIndicator(ship);
+    if (Collision_timer_counter != 0) {
+        Collision_timer_counter = (Collision_timer_counter + 1) % COLLISION_TIMER_LIMITER;
+    }
+}
+
+function showPoints() {
+    push();
+    textSize(15);
+    fill(255);
+    text('Points : ' + points, SCREEN_WIDTH - 80, 20);
+    pop();
+}
+
+function renderShipInvincibilityIndicator(ship) {
+    if (Collision_timer_counter != 0) {
+        ship.color = 'cyan';
+    } else {
+        ship.color = 255;
+    }
+}
