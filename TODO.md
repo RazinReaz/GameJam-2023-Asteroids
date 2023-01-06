@@ -9,3 +9,11 @@
 [x] limit lasers to 30
 [ ] laser shooting late bug fix
 [ ] Laser array shrink if posible
+
+## LEVELS
+[ ] progress bar
+[ ] level booleans and code structure change
+
+## ASSETS
+[ ] shooting sound
+[ ] asteroid breaking sound

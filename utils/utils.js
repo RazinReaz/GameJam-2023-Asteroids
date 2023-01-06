@@ -18,9 +18,13 @@ function resetAsteroidIfNeeded(asteroid) {
         asteroid.velocity.setMag(AST_VEL_MAG_MIN, AST_VEL_MAG_MAX);
         asteroid.totalPoints = floor(random(AST_POINTS_MIN, AST_POINTS_MAX));
         asteroid.offsets = [];
+        let offsetSum = 0;
         for (let i = 0; i < asteroid.totalPoints; i++) {
-            asteroid.offsets.push(random(AST_OFFSET_MIN, AST_OFFSET_MAX));
+            let o = random(AST_OFFSET_MIN, AST_OFFSET_MAX)
+            asteroid.offsets.push(o);
+            offsetSum += o;
         }
+        asteroid.offsetAvg = offsetSum/asteroid.totalPoints;
     }
 }
 
@@ -36,5 +40,13 @@ function sizeConstraintOfAsteroids(asteroids) {
         let dest = asteroid_target_region.getRandPos();
         asteroids.push(new Asteroid(src.x, src.y, dest.x - src.x, dest.y - src.y));
     }
+}
+
+function checkShipCollisionWithAsteroids(ship, asteroids) {
+    for (let asteroid of asteroids) {
+        if (ship.hits(asteroid))
+            return true;
+    }
+    return false;
 }
 

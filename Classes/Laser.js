@@ -26,7 +26,7 @@ class Laser {
 
     hits(asteroid) {
         let d = dist(this.x, this.y, asteroid.position.x, asteroid.position.y);
-        if (d < asteroid.radius) {
+        if (d < (asteroid.radius + asteroid.offsetAvg) * AST_LASER_COLLISION_MULT * asteroid.sizeMultiplier) {
             return true;
         }
         // the next part is useful if laser speed is fast
@@ -34,7 +34,7 @@ class Laser {
         let midy = (this.y + this.prevy) / 2;
 
         d = dist(midx, midy, asteroid.position.x, asteroid.position.y);
-        if (d < asteroid.radius)
+        if (d < (asteroid.radius + asteroid.offsetAvg) * AST_LASER_COLLISION_MULT * asteroid.sizeMultiplier)
             return true;
         return false;
     }

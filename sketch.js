@@ -1,4 +1,4 @@
-let asteroids = [];
+
 let ship;
 
 function keyPressed() {
@@ -9,7 +9,9 @@ function keyPressed() {
   if (keyCode == RIGHT_ARROW)
     ship.turnDirection = +1;
   if (keyCode == LEFT_ARROW)
-    ship.turnDirection = -1;  
+    ship.turnDirection = -1;
+  if (keyCode == ' ')
+    Laser_Limiter_Counter = 0;
 }
 
 function keyReleased() {
@@ -19,6 +21,8 @@ function keyReleased() {
     ship.turnDirection = 0;
   if (keyCode == LEFT_ARROW)
     ship.turnDirection = 0;
+  if (keyCode == ' ')
+    Laser_Limiter_Counter = 0;
 }
 
 
@@ -49,17 +53,27 @@ function draw() {
     resetAsteroidIfNeeded(asteroid);
     asteroid.render();
   }
+
+  //ship collision color change
+  let collides = checkShipCollisionWithAsteroids(ship, asteroids);
+  if(collides){
+    ship.color = 'red';
+  } else {
+    ship.color = 255;
+  }
+
+
   // 32 is keycode of space
-  if(keyIsDown(32)){
+  if (keyIsDown(32)) {
     ship.shoot();
   }
-  for (let i = lasers.length-1; i >= 0 ; i--) {
+  for (let i = lasers.length - 1; i >= 0; i--) {
     lasers[i].update();
     lasers[i].render();
-    for (let j = asteroids.length-1; j >= 0; j--) {
-      if (lasers[i].hits(asteroids[j])){
+    for (let j = asteroids.length - 1; j >= 0; j--) {
+      if (lasers[i].hits(asteroids[j])) {
         let smallerAsteroids = asteroids[j].break();
-        for(a of smallerAsteroids){
+        for (a of smallerAsteroids) {
           asteroids.push(a);
         }
         asteroids.splice(j, 1);

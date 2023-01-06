@@ -1,5 +1,5 @@
 class Ship {
-  constructor(x, y, mass) {
+  constructor(x, y, color = 51) {
     this.x = x;
     this.y = y;
     this.vx = 0;
@@ -13,7 +13,7 @@ class Ship {
     this.turnSpeed = 0.1;
 
     this.radius = 10;
-    this.mass = mass;
+    this.color = 51;
   }
 
 
@@ -30,9 +30,9 @@ class Ship {
     let nexty = this.y + this.vy;
 
     // check for boundaries with nexy and nexty
-    if (nextx > this.radius && nextx < SCREEN_WIDTH-this.radius)
+    if (nextx > this.radius && nextx < SCREEN_WIDTH - this.radius)
       this.x = nextx;
-    if (nexty > this.radius && nexty < SCREEN_HEIGHT-this.radius)
+    if (nexty > this.radius && nexty < SCREEN_HEIGHT - this.radius)
       this.y = nexty;
   }
 
@@ -40,8 +40,8 @@ class Ship {
     push();
     {
       strokeWeight(4);
-      stroke(255);
-      noFill();
+      stroke(this.color);
+      fill(51);
       translate(this.x, this.y);
       rotate(this.heading);
       triangle(-this.radius, this.radius / 2, -this.radius, -this.radius / 2, this.radius, 0);
@@ -61,9 +61,15 @@ class Ship {
     }
   }
 
-  shoot(){
-    if(Laser_Limiter_Counter == 0)
+  shoot() {
+    if (Laser_Limiter_Counter == 0)
       lasers.unshift(new Laser(this));
-    Laser_Limiter_Counter = (Laser_Limiter_Counter+1)%LASER_LIMITER;
+    Laser_Limiter_Counter = (Laser_Limiter_Counter + 1) % LASER_LIMITER;
+  }
+
+  hits(asteroid) {
+    // can be made much more accurate
+    let d = dist(this.x, this.y, asteroid.position.x, asteroid.position.y);
+    return d < this.radius * 0.9 + (asteroid.radius + asteroid.offsetAvg) * asteroid.sizeMultiplier;
   }
 }

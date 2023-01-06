@@ -10,9 +10,13 @@ class Asteroid {
 
         this.totalPoints = floor(random(AST_POINTS_MIN, AST_POINTS_MAX));
         this.offsets = [];
+        let offsetSum = 0;
         for (let i = 0; i < this.totalPoints; i++) {
-            this.offsets.push(random(AST_OFFSET_MIN, AST_OFFSET_MAX));
+            let o = random(AST_OFFSET_MIN, AST_OFFSET_MAX)
+            this.offsets.push(o);
+            offsetSum += o;
         }
+        this.offsetAvg = offsetSum / this.totalPoints;
         this.resetDist = DIST_TO_RESET_ASTEROID * random(0.7, 1);  //!HARD CODED
     }
     update() {
@@ -32,7 +36,11 @@ class Asteroid {
             vertex(x * this.sizeMultiplier, y * this.sizeMultiplier);
         }
         endShape(CLOSE);
+        // ellipse(0, 0, (this.radius + this.offsetAvg) * AST_LASER_COLLISION_MULT * 2 * this.sizeMultiplier);
+        // ellipse(0, 0, (this.radius + this.offsetAvg) * 2 * this.sizeMultiplier);
         pop();
+
+
     }
 
     break() {
@@ -49,3 +57,5 @@ class Asteroid {
         return smallerAsteroids;
     }
 }
+
+let asteroids = [];
