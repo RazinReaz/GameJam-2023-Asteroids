@@ -93,6 +93,7 @@ function draw() {
 function preload() {
   menuFont = loadFont('Assets/fonts/upheavtt.ttf');
   storyFont = loadFont('Assets/fonts/Minecraft.ttf');
+  laserSound = loadSound('Assets/sounds/laser.mp3');
 }
 
 function game(level) {

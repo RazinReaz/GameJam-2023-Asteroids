@@ -38,7 +38,7 @@ const LASER_LIMITER = 15;
 const COLLISION_TIMER_LIMITER = 150;
 
 // for levels
-const TARGET_POINTS_LEVEL_1 = 500;
+const TARGET_POINTS_LEVEL_1 = 1000;
 const TARGET_POINTS_LEVEL_2 = 800;
 const TARGET_POINTS_LEVEL_3 = PROGRESSBAR_WIDTH;
 const LEVEL_3_TAUNT_INIT = -1000;
@@ -60,3 +60,5 @@ let gameOverMessage;
 // fonts
 let menuFont;
 let storyFont;
+// sounds
+let laserSound;

@@ -117,6 +117,7 @@ class Ship {
 
   shoot() {
     if (Laser_Limiter_Counter == 0) {
+      laserSound.play();
       lasers.unshift(new Laser(this));
       Laser_Limiter_Counter = 1;
     }
