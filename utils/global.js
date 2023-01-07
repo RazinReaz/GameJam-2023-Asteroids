@@ -35,3 +35,8 @@ const LEVEL_1_TARGET_POINTS = 500;
 let Laser_Limiter_Counter = 0;
 let Collision_timer_counter = 0;
 let points = 0;
+let state = 0;
+
+// fonts
+let menuFont;
+let storyFont;

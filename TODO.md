@@ -13,6 +13,8 @@
 ## LEVELS
 [ ] progress bar
 [ ] level booleans and code structure change
+[ ] stage change logic
+[ ] 
 
 ## ASSETS
 [ ] shooting sound
