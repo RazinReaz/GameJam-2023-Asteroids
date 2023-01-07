@@ -12,7 +12,7 @@ function menu() {
   fill(255);
 }
 
-function dialoguesTextFormatting(line1, line2, line3) {
+function dialoguesTextFormatting(line1, line2, line3, line4) {
   background(51);
   textFont(storyFont);
   textSize(SCREEN_WIDTH / 40);
@@ -20,34 +20,43 @@ function dialoguesTextFormatting(line1, line2, line3) {
   text(line1, SCREEN_CENTER_X, SCREEN_CENTER_Y - SCREEN_HEIGHT / 10);
   text(line2, SCREEN_CENTER_X, SCREEN_CENTER_Y);
   text(line3, SCREEN_CENTER_X, SCREEN_CENTER_Y + SCREEN_HEIGHT / 10);
+  textFont(menuFont);
+  textSize(SCREEN_WIDTH / 40);
+  text(line4, SCREEN_CENTER_X, SCREEN_CENTER_Y + 3*SCREEN_HEIGHT / 10);
 }
 
 function level1Text() {
   dialoguesTextFormatting('It has been years, decades actually, since I saw another human face.',
-    'Floating, drifting into the unknown.');
+    'Floating, drifting into the unknown.',
+    'click to continue');
 }
 
 function level1End() {
   dialoguesTextFormatting('LEVEL 1 PASSED\n\nThat is how it is, living out here. Surviving actually.',
     '\nYou never know what is gonna get you first, ',
-    '\nchunks of space-rock, or your loneliness.');
+    '\nchunks of space-rock, or your loneliness.',
+    'click to continue');
 }
 
 function level2Text() {
-  dialoguesTextFormatting('No, still nothing. No comms. I baffle myself at times, how do still I hope?',
-    'Is there any end to this misery? Any end to this unending progress?');
+  dialoguesTextFormatting('No, still nothing. No comms. I baffle myself at times, how do I still hope?',
+    'Is there any end to this misery? Any end to this unending progress?', 
+    '',
+    'click to continue');
 }
 
 function level2End() {
   dialoguesTextFormatting('LEVEL 2 PASSED\n\nI don\'t know what just happened.',
   '\nAm I alive?',
-  '\nYou can hear me?!?');
+  '\nYou can hear me?!?',
+  'click to continue');
 }
 
 function level3Text() {
   dialoguesTextFormatting('So you mean to tell me,',
     'there is a way out? But wait...',
-    'Who ARE you?');
+    'Who ARE you?',
+    'click to continue');
 }
 
 function level3Mid() {
@@ -58,7 +67,8 @@ function level3Mid() {
 function gameCleared() {
   dialoguesTextFormatting('GAME CLEARED\n\nThank you, whoever you are...',
     '\nI am finally free. I am finally home.',
-    '\nTHANK YOU!');
+    '\nTHANK YOU!',
+    'click to go to main menu');
 }
 
 

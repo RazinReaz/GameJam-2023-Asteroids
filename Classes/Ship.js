@@ -131,7 +131,6 @@ class Ship {
   }
 
   decreaseHealth() {
-    // ! LEVEL CHANGE
     if (Collision_timer_counter == 0 && level != 3) {
       this.health = max(0, this.health - 1);
       Collision_timer_counter++;
