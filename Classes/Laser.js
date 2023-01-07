@@ -38,6 +38,10 @@ class Laser {
             return true;
         return false;
     }
+
+    inside(x, y, w, h) {
+        return x < this.x && this.x < x+w && y < this.y && this.y < y+h;
+    }
 }
 
 let lasers = [];

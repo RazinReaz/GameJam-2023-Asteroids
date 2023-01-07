@@ -60,9 +60,9 @@ class Asteroid {
         // ellipse(0, 0, (this.radius + this.offsetAvg) * AST_LASER_COLLISION_MULT * 2 * this.sizeMultiplier);
         // ellipse(0, 0, (this.radius + this.offsetAvg) * 2 * this.sizeMultiplier);
         pop();
-
-
     }
+
+    
 
     break() {
         let smallerAsteroids = [];

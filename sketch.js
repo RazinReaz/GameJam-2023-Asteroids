@@ -44,9 +44,7 @@ function setup() {
 }
 
 function draw() {
-  let level = state;
-  // level 0 : menu
-
+  level = Math.floor(state / 100);
   switch (state) {
     case MENU:
       menu();
@@ -60,7 +58,6 @@ function draw() {
     case LEVEL_1_GAME:
     case LEVEL_2_GAME:
     case LEVEL_3_GAME:
-      level=Math.floor(state/100);
       game(level);
       break;
     case LEVEL_1_END:
@@ -101,16 +98,23 @@ function preload() {
 function game(level) {
   background(51);
 
+  // UI
+  showProgressBar();
+  showCurrentLevel(level);
+
+  // SHIP
   ship.update();
   ship.render();
 
+
+  // ASTEROIDS
   for (let asteroid of asteroids) {
     asteroid.update();
     resetAsteroidIfNeeded(asteroid);
     asteroid.render();
   }
 
-  //ship collision color change
+  //ship collision invincibility on
   let collides = checkShipCollisionWithAsteroids(ship, asteroids);
   if(collides){
     ship.decreaseHealth();
@@ -137,7 +141,14 @@ function game(level) {
     }
   }
 
-  showProgressBar();
+  // STATE CHANGE
+  checkPulse(ship, level);
+  checkLevelEnd(level);
+
+  // QUALITY OF LIFE
+  level3Hints("No meteors here. What do I do now?", "What are those red things?", "What's that white box over there?");
+  level3Codes(); //health, push
+  
   constraintOfLasers(lasers);
   sizeConstraintOfAsteroids(asteroids);
   laserTimer();
@@ -145,26 +156,22 @@ function game(level) {
 }
 
 function gameOver(level) {
-  let gameOverMessage;
   if (level == 1) {
-    gameOverMessage = "You are a failure.";
+    gameOverMessage = "You are a failure. l 1";
   } else if (level == 2) {
-    gameOverMessage = "You are a failure.";
+    gameOverMessage = "BUT... WAIT...I THOUGHT...";
   } else if (level == 3) {
-    gameOverMessage = "You are a failure.";
+    gameOverMessage = "You are a failure. l 3";
   }
   background(51);
   fill(255);
   textSize(50);
   textFont(menuFont);
   text("GAME OVER", SCREEN_CENTER_X, SCREEN_CENTER_Y-SCREEN_HEIGHT/10);
-  textSize(30);
+  textSize(20);
   textFont(storyFont);
   text(gameOverMessage, SCREEN_CENTER_X, SCREEN_CENTER_Y);
   textSize(30);
   textFont(menuFont);
   text("Is this the end? Click to restart.", SCREEN_CENTER_X, SCREEN_CENTER_Y+SCREEN_HEIGHT/10);
-  if (mouseIsPressed) {
-    state = level*100; //+1;
-  }
 }

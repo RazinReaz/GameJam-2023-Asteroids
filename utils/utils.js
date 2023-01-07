@@ -27,7 +27,7 @@ function constraintOfLasers(lasers) {
 }
 
 function sizeConstraintOfAsteroids(asteroids) {
-    if (asteroids.length < ASTEROID_COUNT) {
+    if (asteroids.length < ASTEROID_COUNT && level != 3) {
         for (let i = 0; i < NEW_ASTEROID_COUNT; i++) {
             let src = asteroid_generation_areas.random().getRandPos();
             let dest = asteroid_target_region.getRandPos();
@@ -67,8 +67,10 @@ function showPoints() {
 
 function renderShipInvincibilityIndicator(ship) {
     if (Collision_timer_counter != 0) {
-        ship.color = 'cyan';
+        ship.invincibility = true;
     } else {
-        ship.color = 255;
+        ship.invincibility = false;
     }
 }
+
+
