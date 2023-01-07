@@ -116,16 +116,19 @@ function checkPulse(ship, level) {
         if (ship.health == 0) {
             state = GAME_OVER;
             gameOverMessage = 'Who would expect to survive after hitting ' + SHIP_INIT_HEALTH + ' asteroids?';
+            gameOverSound.play();
         }
     } else if (level == 2) {
         if (points >= TARGET_POINTS_LEVEL_2) {
             state = GAME_OVER;
             gameOverMessage = 'But... wait... that was not supposed to happen!';
+            gameOverSound.play();
         }
     } else if ( level == 3) {
         if (ship.health == 0) {
             state = GAME_OVER;
             gameOverMessage = 'I thought you were my friend';
+            gameOverSound.play();
         }
     }
 }
@@ -135,14 +138,17 @@ function checkLevelEnd(level) {
     if (level == 1) {
         if (points >= TARGET_POINTS_LEVEL_1) {
             state = LEVEL_1_END;
+            levelClearedSound.play();
         }
     } else if (level == 2) {
         if (ship.health == 0) {
             state = LEVEL_2_END;
+            levelClearedSound.play();
         }
     } else if (level == 3) {
         if(points >= TARGET_POINTS_LEVEL_3) {
             state = GAME_CLEARED;
+            levelClearedSound.play();
         }
     }
 }

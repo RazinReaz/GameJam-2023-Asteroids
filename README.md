@@ -15,7 +15,7 @@ There are 3 levels in total. It's your job to figure out how to beat them.
 
 ## Controls
 - Click the `left mouse button` to skip text screens
-- Use the `Arrow keys` to move
+- Use the `arrow keys` to move
 - Use the `spacebar` to shoot
 
 ## HOW TO RUN

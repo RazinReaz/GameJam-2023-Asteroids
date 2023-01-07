@@ -5,6 +5,7 @@ function dist(x1, y1, x2, y2) {
 Array.prototype.random = function () {
     return this[Math.floor((Math.random() * this.length))];
 }
+
 function resetAsteroidIfNeeded(asteroid) {
     let d = dist(asteroid.position.x, asteroid.position.y, SCREEN_CENTER_X, SCREEN_CENTER_Y);
     if (d >= asteroid.resetDist) {
@@ -12,6 +13,7 @@ function resetAsteroidIfNeeded(asteroid) {
     }
 }
 
+// elminate lasers that are out of screen
 function constraintOfLasers(lasers) {
     for (let i = 0; i < lasers.length; i++) {
         let laser = lasers[i];
@@ -26,6 +28,7 @@ function constraintOfLasers(lasers) {
     }
 }
 
+// generate new asteroids if needed
 function sizeConstraintOfAsteroids(asteroids) {
     if (asteroids.length < ASTEROID_COUNT && level != 3) {
         for (let i = 0; i < NEW_ASTEROID_COUNT; i++) {
@@ -36,6 +39,7 @@ function sizeConstraintOfAsteroids(asteroids) {
     }
 }
 
+// check if ship is hit by asteroids
 function checkShipCollisionWithAsteroids(ship, asteroids) {
     for (let asteroid of asteroids) {
         if (ship.hits(asteroid))
@@ -44,12 +48,14 @@ function checkShipCollisionWithAsteroids(ship, asteroids) {
     return false;
 }
 
+// limiting laser firing rate
 function laserTimer() {
     if (Laser_Limiter_Counter != 0) {
         Laser_Limiter_Counter = (Laser_Limiter_Counter + 1) % LASER_LIMITER;
     }
 }
 
+// controlling post-collision invincibility
 function collisionTimer(ship) {
     renderShipInvincibilityIndicator(ship);
     if (Collision_timer_counter != 0) {

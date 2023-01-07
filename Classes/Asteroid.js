@@ -75,6 +75,7 @@ class Asteroid {
             smallerAsteroids.push(new Asteroid(this.position.x, this.position.y, r * cos(a + PI / 4), r * sin(a + PI / 4), this.sizeMultiplier / 2));
             smallerAsteroids.push(new Asteroid(this.position.x, this.position.y, r * cos(a - PI / 4), r * sin(a - PI / 4), this.sizeMultiplier / 2));
         }
+        asteroidSound.play();
         return smallerAsteroids;
     }
 }

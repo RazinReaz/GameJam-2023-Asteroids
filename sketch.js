@@ -2,8 +2,10 @@
 let ship;
 
 function keyPressed() {
-  if (keyCode == UP_ARROW)
+  if (keyCode == UP_ARROW) {
     ship.moveDirection = +1;
+    // thrustSound.play();
+  }
   if (keyCode == DOWN_ARROW)
     ship.moveDirection = -1;
   if (keyCode == RIGHT_ARROW)
@@ -24,10 +26,6 @@ function keyReleased() {
   if (keyCode == ' ')
     Laser_Limiter_Counter = 0;
 }
-
-
-
-
 
 
 function setup() {
@@ -52,9 +50,6 @@ function draw() {
     case LEVEL_1_TEXT:
       level1Text();
       break;
-    case LEVEL_1_START:
-      level1Start();
-      break;
     case LEVEL_1_GAME:
     case LEVEL_2_GAME:
     case LEVEL_3_GAME:
@@ -66,23 +61,14 @@ function draw() {
     case LEVEL_2_TEXT:
       level2Text();
       break;
-    case LEVEL_2_START:
-      level2Start();
-      break;
     case LEVEL_2_END:
       level2End();
       break;
     case LEVEL_3_TEXT:
       level3Text();
       break;
-    case LEVEL_3_START:
-      level3Start();
-      break;
-    case LEVEL_3_MID:
-      level3Mid();
-      break;
     case GAME_OVER:
-      gameOver(level);
+      gameOver();
       break;
     case GAME_CLEARED:
       gameCleared();
@@ -94,6 +80,17 @@ function preload() {
   menuFont = loadFont('Assets/fonts/upheavtt.ttf');
   storyFont = loadFont('Assets/fonts/Minecraft.ttf');
   laserSound = loadSound('Assets/sounds/laser.mp3');
+  laserSound.setVolume(0.5);
+  asteroidSound = loadSound('Assets/sounds/asteroid.wav');
+  asteroidSound.setVolume(0.2);
+  bgSound = loadSound('Assets/sounds/bg.mp3');
+  bgSound.setVolume(0.05);
+  gameOverSound = loadSound('Assets/sounds/gameover.mp3');
+  gameOverSound.setVolume(0.5);
+  levelClearedSound = loadSound('Assets/sounds/levelcleared.mp3');
+  levelClearedSound.setVolume(0.5);
+  decreaseHealthSound = loadSound('Assets/sounds/decreasehealth.mp3');
+  decreaseHealthSound.setVolume(0.5);
 }
 
 function game(level) {
@@ -148,7 +145,7 @@ function game(level) {
 
   // QUALITY OF LIFE
   level3Hints("No meteors here. What do I do now?", "What are those red things?", "What's that white box over there?");
-  level3Codes(); //health, push
+  level3Codes(); //health, push progress bar
   
   constraintOfLasers(lasers);
   sizeConstraintOfAsteroids(asteroids);
@@ -156,14 +153,7 @@ function game(level) {
   collisionTimer(ship);
 }
 
-function gameOver(level) {
-  if (level == 1) {
-    gameOverMessage = "You are a failure. l 1";
-  } else if (level == 2) {
-    gameOverMessage = "BUT... WAIT...I THOUGHT...";
-  } else if (level == 3) {
-    gameOverMessage = "You are a failure. l 3";
-  }
+function gameOver() {
   background(51);
   fill(255);
   textSize(50);
@@ -172,7 +162,7 @@ function gameOver(level) {
   textSize(20);
   textFont(storyFont);
   text(gameOverMessage, SCREEN_CENTER_X, SCREEN_CENTER_Y);
-  textSize(30);
+  textSize(15);
   textFont(menuFont);
-  text("Is this the end? Click to restart.", SCREEN_CENTER_X, SCREEN_CENTER_Y+SCREEN_HEIGHT/10);
+  text("Is this the end? Click to restart.", SCREEN_CENTER_X, SCREEN_CENTER_Y + 0.95 * SCREEN_HEIGHT / 2);
 }

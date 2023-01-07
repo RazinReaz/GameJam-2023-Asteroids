@@ -134,8 +134,10 @@ class Ship {
     if (Collision_timer_counter == 0 && level != 3) {
       this.health = max(0, this.health - 1);
       Collision_timer_counter++;
+      decreaseHealthSound.play();
     } else if (level == 3) {
       this.health = max(0, this.health - 1);
+      decreaseHealthSound.play();
     }
   }
 

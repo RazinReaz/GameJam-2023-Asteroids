@@ -1,4 +1,4 @@
-function menu() {
+function menu() {  
   background(51);
   textFont(menuFont);
   textSize(SCREEN_WIDTH / 10);
@@ -21,13 +21,14 @@ function dialoguesTextFormatting(line1, line2, line3, line4) {
   text(line2, SCREEN_CENTER_X, SCREEN_CENTER_Y);
   text(line3, SCREEN_CENTER_X, SCREEN_CENTER_Y + SCREEN_HEIGHT / 10);
   textFont(menuFont);
-  textSize(SCREEN_WIDTH / 40);
-  text(line4, SCREEN_CENTER_X, SCREEN_CENTER_Y + 3*SCREEN_HEIGHT / 10);
+  textSize(15);
+  text(line4, SCREEN_CENTER_X, SCREEN_CENTER_Y + 0.95 * SCREEN_HEIGHT / 2);
 }
 
 function level1Text() {
   dialoguesTextFormatting('It has been years, decades actually, since I saw another human face.',
     'Floating, drifting into the unknown.',
+    '',
     'click to continue');
 }
 
@@ -50,6 +51,7 @@ function level2End() {
   '\nAm I alive?',
   '\nYou can hear me?!?',
   'click to continue');
+  
 }
 
 function level3Text() {
@@ -57,11 +59,6 @@ function level3Text() {
     'there is a way out? But wait...',
     'Who ARE you?',
     'click to continue');
-}
-
-function level3Mid() {
-  dialoguesTextFormatting('Is there s',
-    'lvl 3 mid');
 }
 
 function gameCleared() {
@@ -93,5 +90,10 @@ function mouseClicked() {
   } else if (state == GAME_CLEARED || state == GAME_OVER) {
     state = MENU; 
     levelReset();
+  }
+  if (!bgLoopOn) {
+    bgSound.loop();
+    console.log('bgSound.loop');
+    bgLoopOn = true;
   }
 }

@@ -62,3 +62,10 @@ let menuFont;
 let storyFont;
 // sounds
 let laserSound;
+let asteroidSound;
+let bgSound;
+let gameOverSound;
+let levelClearedSound;
+let decreaseHealthSound;
+
+let bgLoopOn= false;
