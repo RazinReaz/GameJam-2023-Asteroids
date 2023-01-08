@@ -22,7 +22,7 @@ const AST_OFFSET_MIN = 0;
 const AST_OFFSET_MAX = 20;
 const AST_LASER_COLLISION_MULT = 1.05;
 const ASTEROID_COUNT = 4;
-const NEW_ASTEROID_COUNT = 2;
+const NEW_ASTEROID_COUNT = 4;
 
 // for ship
 const SHIP_INIT_HEALTH = 5;

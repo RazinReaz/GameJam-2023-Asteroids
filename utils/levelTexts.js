@@ -93,7 +93,6 @@ function mouseClicked() {
   }
   if (!bgLoopOn) {
     bgSound.loop();
-    console.log('bgSound.loop');
     bgLoopOn = true;
   }
 }
